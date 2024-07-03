@@ -1,7 +1,7 @@
-import GoogleIcon from "@/icons/GoogleIcon";
-import ContainerBox from "@/layouts/ContainerBox";
-import GuestLayout from "@/layouts/GuestLayout";
-import { router } from "@inertiajs/react";
+import GoogleIcon from '@/icons/GoogleIcon';
+import ContainerBox from '@/layouts/ContainerBox';
+import GuestLayout from '@/layouts/GuestLayout';
+import { router } from '@inertiajs/react';
 import {
   Anchor,
   Button,
@@ -15,64 +15,83 @@ import {
   Image,
   Container,
   useComputedColorScheme,
-} from "@mantine/core";
-import { useForm } from "laravel-precognition-react-inertia";
-import { useEffect, useRef, useState } from "react";
-import LoginNotification from "./LoginNotification";
-import classes from "./css/Login.module.css";
+} from '@mantine/core';
+import { useForm } from 'laravel-precognition-react-inertia';
+import { useEffect, useRef, useState } from 'react';
+import LoginNotification from './LoginNotification';
+import classes from './css/Login.module.css';
 
 const Login = ({ notify }) => {
   const [socialLoginPending, setSocialLoginPending] = useState(false);
   const passwordRef = useRef(null);
   const computedColorScheme = useComputedColorScheme();
 
-  const form = useForm("post", route("auth.login.attempt"), {
-    email: route().params?.email || "",
-    password: "",
+  const form = useForm('post', route('auth.login.attempt'), {
+    email: route().params?.email || '',
+    password: '',
     remember: false,
   });
 
   useEffect(() => route().params?.email && passwordRef.current.focus(), []);
 
-  const submit = (e) => {
+  const submit = e => {
     e.preventDefault();
 
     form.submit({ preserveScroll: true });
   };
 
   // Change logo colors based on site theme
-    const logoSrc =
-    computedColorScheme === "dark"
-      ? "assets/redbean-tagline/rb-tg-svg-red.svg"
-      : "assets/redbean-tagline/rb-tg-svg-red-navy.svg";
+  const logoSrc =
+    computedColorScheme === 'dark'
+      ? 'assets/redbean-tagline/rb-tg-png-red.png'
+      : 'assets/redbean-tagline/rb-tg-png-red-navy.png';
 
   return (
     <>
       <Container p={32}>
-        <Image h={80} fit="contain" src={logoSrc} />
+        <Image
+          h={80}
+          fit='contain'
+          src={logoSrc}
+        />
       </Container>
-            
-      <Title ta="center" className={classes.title}>
+
+      <Title
+        ta='center'
+        className={classes.title}
+      >
         Welcome back!
       </Title>
 
-
-      <Text c="dimmed" size="sm" ta="center" mt={5}>
+      <Text
+        c='dimmed'
+        size='sm'
+        ta='center'
+        mt={5}
+      >
         You may login to your account below
       </Text>
 
       <LoginNotification notify={notify} />
 
-
       <form onSubmit={submit}>
-        <ContainerBox shadow="md" p={30} mt={30} radius="md">
-          <Group grow mb="md" mt="md">
+        <ContainerBox
+          shadow='md'
+          p={30}
+          mt={30}
+          radius='md'
+        >
+          <Group
+            grow
+            mb='md'
+            mt='md'
+          >
             <Button
               leftSection={<GoogleIcon />}
-              variant="default"
-              radius="xl"
-              component="a"
-              href={route("auth.login.social.google")}
+              variant='default'
+              radius='xl'
+              component='a'
+              href={route('auth.login.social.google')}
               loading={socialLoginPending}
               onClick={() => setSocialLoginPending(true)}
             >
@@ -80,37 +99,49 @@ const Login = ({ notify }) => {
             </Button>
           </Group>
 
-          <Divider label="Or continue with email" labelPosition="center" my="lg" />
+          <Divider
+            label='Or continue with email'
+            labelPosition='center'
+            my='lg'
+          />
 
           <TextInput
-            label="Email"
-            placeholder="Your email"
+            label='Email'
+            placeholder='Your email'
             required
             value={form.data.email}
-            onChange={(e) => form.setData("email", e.target.value)}
-            onBlur={() => form.validate("email")}
+            onChange={e => form.setData('email', e.target.value)}
+            onBlur={() => form.validate('email')}
             error={form.errors.email}
           />
           <PasswordInput
             ref={passwordRef}
-            label="Password"
-            placeholder="Your password"
+            label='Password'
+            placeholder='Your password'
             required
-            mt="md"
+            mt='md'
             value={form.data.password}
-            onChange={(e) => form.setData("password", e.target.value)}
+            onChange={e => form.setData('password', e.target.value)}
           />
-          <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
+          <Group
+            justify='space-between'
+            mt='lg'
+          >
+            <Checkbox label='Remember me' />
             <Anchor
-              type="button"
-              size="sm"
-              onClick={() => router.get(route("auth.forgotPassword.form"))}
+              type='button'
+              size='sm'
+              onClick={() => router.get(route('auth.forgotPassword.form'))}
             >
               Forgot password?
             </Anchor>
           </Group>
-          <Button type="submit" fullWidth mt="xl" disabled={form.processing}>
+          <Button
+            type='submit'
+            fullWidth
+            mt='xl'
+            disabled={form.processing}
+          >
             Sign in
           </Button>
         </ContainerBox>
@@ -119,6 +150,6 @@ const Login = ({ notify }) => {
   );
 };
 
-Login.layout = (page) => <GuestLayout title="Login">{page}</GuestLayout>;
+Login.layout = page => <GuestLayout title='Login'>{page}</GuestLayout>;
 
 export default Login;
