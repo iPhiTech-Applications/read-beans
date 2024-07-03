@@ -1,1 +1,0 @@
-import{j as s}from"./app-7bc20a4e.js";import{C as d}from"./Card-c6822a5e.js";const t="_card_11rny_1",o={card:t};function e({children:r,...a}){return s.jsx(d,{withBorder:!0,radius:"md",padding:"lg",className:o.card,...a,children:r})}export{e as C};
