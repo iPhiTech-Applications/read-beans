@@ -1,5 +1,4 @@
 import { Container, useComputedColorScheme, Image } from '@mantine/core';
-import { IconChartArcs } from '@tabler/icons-react';
 
 export default function Logo(props) {
   const computedColorScheme = useComputedColorScheme();
