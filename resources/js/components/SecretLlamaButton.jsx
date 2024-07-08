@@ -8,6 +8,9 @@ export default function SecretLlamaButton() {
       <HoverCard>
         <HoverCard.Target>
           <Button
+            component='a'
+            href='https://secretllama.com'
+            target='_blank'
             size='md'
             color='blue'
             variant='light'
