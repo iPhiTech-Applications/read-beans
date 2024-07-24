@@ -9,6 +9,7 @@ use App\Http\Controllers\DropdownValuesController;
 use App\Http\Controllers\Invoice\InvoiceTasksController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MyWork\ActivityController;
+use App\Http\Controllers\MyWork\CalendarController;
 use App\Http\Controllers\MyWork\MyWorkTaskController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
@@ -82,7 +83,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'my-work', 'as' => 'my-work.'], function () {
         Route::get('tasks', [MyWorkTaskController::class, 'index'])->name('tasks.index');
         Route::get('activity', [ActivityController::class, 'index'])->name('activity.index');
+        Route::get('calendar', [CalendarController::class, 'index'])->name('calendar.index');
     });
+
+    Route::get('calendar', [CalendarController::class, 'index'])->name('calendar');
 
     // Clients
     Route::group(['prefix' => 'clients', 'as' => 'clients.'], function () {

@@ -56,6 +56,12 @@ export default function Sidebar() {
             active: route().current("my-work.activity.*"),
             visible: can("view activities"),
           },
+          {
+            label: "Calendar",
+            link: route("my-work.calendar.index"),
+            active: route().current("my-work.calendar.*"),
+            visible: can("view activities"),
+          }
         ],
       },
       {
@@ -140,7 +146,7 @@ export default function Sidebar() {
             visible: can("view labels"),
           },
         ],
-      },
+      }
     ]);
   }, []);
 
